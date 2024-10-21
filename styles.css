@@ -33,8 +33,9 @@ nav ul li a {
 }
 
 #accueil {
+    background: url('ia-image.jpg') no-repeat center center/cover;
     height: 100vh;
-    color: black;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,6 +58,14 @@ section {
     flex-wrap: wrap;
 }
 
+#about{
+    width: 100%;
+    background-color: #fff;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
 .competence, .project {
     background-color: #fff;
