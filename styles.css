@@ -52,13 +52,13 @@ section {
     text-align: center;
 }
 
-#parcours-scolaire .parcours-container, #projects .projects-container {
+#parcours-scolaire .parcours-container, #competences .competence-container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
-#about{
+#about, #cv{
     width: 100%;
     background-color: #fff;
     padding: 1rem;
@@ -67,17 +67,11 @@ section {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.head-competence{
-    justify-content: center;
-    align-items: center;
+.formation h3,.competence h3{
     text-align: center;
 }
 
-.formation h3,.project h3{
-    text-align: center;
-}
-
-.formation, .project {
+.formation,.competence {
     background-color: #fff;
     padding: 1rem;
     margin: 1rem;
