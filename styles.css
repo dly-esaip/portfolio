@@ -67,6 +67,12 @@ section {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.head-competence{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .competence, .project {
     background-color: #fff;
     padding: 1rem;
