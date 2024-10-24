@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio de Compétences</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="experience-professionnel.html">Expériences professionnelles</a></li>
+                <li><a href="competences.html">Compétences</a></li>
+                <li><a href="engagements-benevoles.html">Engagements bénévoles</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="contact-page">
+        <div class="container">
+            <h1>Contactez-moi</h1>
+            <p>Remplissez le formulaire ci-dessous pour m'envoyer un message. Je vous répondrai dès que possible.</p>
+            <form action="submit_form.php" method="POST" class="contact-form">
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" placeholder="Votre nom" required>
+
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" placeholder="Votre email" required>
+
+                <label for="subject">Objet :</label>
+                <input type="text" id="subject" name="subject" placeholder="Objet du message" required>
+
+                <label for="message">Message :</label>
+                <textarea id="message" name="message" rows="6" placeholder="Votre message..." required></textarea>
+
+                <button type="submit">Envoyer</button>
+            </form>
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Pour toute information supplémentaire, n'hésitez pas à me contacter via l'adresse email suivante :</p>
+        <a href="monemail">damien.ly03@gmail.com</a>
+    </section>
+    <footer>
+        <p>&copy; 2024 LY Damien. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
