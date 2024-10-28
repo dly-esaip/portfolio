@@ -92,6 +92,16 @@ ul{
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
+    margin-bottom: 100px;
+}
+.experience p{
+    margin-bottom: 30px;
+}
+#images_exp {
+    display: block;
+    margin: auto;
+    width: 500px;
+    height: auto;
 }
 /* Style spécifique pour la page de contact */
 #contact-page {
@@ -120,7 +130,7 @@ ul{
     font-weight: bold;
 }
 
-.contact-form input,
+
 .contact-form textarea {
     width: 100%;
     padding: 0.75rem;
