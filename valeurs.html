@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valeurs — Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── VALEURS HERO SPLIT ── */
+    .values-split {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 4rem;
+      margin-top: 1rem;
+    }
+
+    .values-divider {
+      background: var(--border);
+      height: 100%;
+    }
+
+    .values-group-title {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding-bottom: 1.2rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-green { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+    .dot-red   { background: var(--danger); box-shadow: 0 0 6px var(--danger); }
+
+    /* ── VALUE CARDS ── */
+    .value-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1.4rem 1.6rem;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      border: 1px solid transparent;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+
+    .value-card:hover { transform: translateX(4px); }
+
+    .value-card.pos {
+      background: rgba(200,245,66,0.06);
+      border-color: rgba(200,245,66,0.15);
+    }
+
+    .value-card.pos:hover { border-color: rgba(200,245,66,0.3); }
+
+    .value-card.neg {
+      background: rgba(245,95,66,0.06);
+      border-color: rgba(245,95,66,0.15);
+    }
+
+    .value-card.neg:hover { border-color: rgba(245,95,66,0.3); }
+
+    .value-name {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .value-icon { font-size: 1.1rem; }
+
+    .value-desc {
+      font-size: 0.82rem;
+      color: var(--muted2);
+      line-height: 1.6;
+      padding-left: 1.85rem;
+    }
+
+    /* ── BOUSSOLE VISUELLE ── */
+    .compass-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 3rem;
+      margin: 4rem 0;
+      text-align: center;
+    }
+
+    .compass-title {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+
+    .compass-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .compass-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .compass-icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .compass-item:hover .compass-icon {
+      border-color: var(--accent);
+      transform: scale(1.08);
+    }
+
+    .compass-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* ── ANTI-VALUES NOTE ── */
+    .anti-note {
+      background: rgba(245,95,66,0.05);
+      border: 1px solid rgba(245,95,66,0.15);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .anti-note-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+    .anti-note p {
+      font-size: 0.85rem;
+      color: var(--muted2);
+      line-height: 1.7;
+    }
+
+    .anti-note strong { color: var(--danger); }
+
+    @media (max-width: 768px) {
+      .values-split { grid-template-columns: 1fr; }
+      .values-divider { display: none; }
+      .compass-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">DLY</a>
+    <ul class="nav-links">
+    <li><a href="index.html"><span class="nav-num">00</span>Accueil</a></li>
+    <li><a href="orientation.html"><span class="nav-num">01</span>Profil</a></li>
+    <li><a href="formation.html"><span class="nav-num">02</span>Formation</a></li>
+    <li><a href="valeurs.html"><span class="nav-num">03</span>Valeurs</a></li>
+    <li><a href="projet.html"><span class="nav-num">04</span>Projet Pro</a></li>
+     <li><a href="benevolat.html"><span class="nav-num">05</span>Engagements bénévoles</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrapper">
+  <div class="container">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header anim-slideUp">
+      <div class="page-header-bg"></div>
+      <div class="page-header-tag">03 · Valeurs &amp; anti-valeurs</div>
+      <h1 class="page-title">Mes Valeurs</h1>
+      <p class="page-subtitle">
+        Ce qui m'anime et ce que je refuse, mes convictions et ce qui me définit.
+      </p>
+    </div>
+
+    <!-- BOUSSOLE VISUELLE -->
+    <div class="compass-section anim-fadeIn delay-1">
+      <div class="compass-title">Mes piliers · Vue synthétique</div>
+      <div class="compass-grid">
+        <div class="compass-item">
+          <div class="compass-icon">📚</div>
+          <div class="compass-label">Innovation</div>
+        </div>
+        <div class="compass-item">
+          <div class="compass-icon">🤝</div>
+          <div class="compass-label">Collaboration</div>
+        </div>
+        <div class="compass-item">
+          <div class="compass-icon">🎯</div>
+          <div class="compass-label">Rigueur</div>
+        </div>
+        <div class="compass-item">
+          <div class="compass-icon">🌱</div>
+          <div class="compass-label">Curiosité</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPLIT VALUES -->
+    <div class="section-label">Valeurs &amp; anti-valeurs en détail</div>
+
+    <div class="values-split">
+
+      <!-- VALEURS -->
+      <div class="anim-slideUp">
+        <div class="values-group-title">
+          <div class="dot dot-green"></div>
+          Ce qui me guide
+        </div>
+
+        <div class="value-card pos">
+          <div class="value-name"><span class="value-icon">📚</span> Discipline</div>
+          <div class="value-desc">Enfin, la discipline est une valeur qui me permet de rester constant dans mon travail et de progresser sur le long terme.
+            Dans les projets techniques, certaines difficultés peuvent demander du temps et de la persévérance avant d’être résolues. La discipline me permet donc de rester impliqué, de respecter mes objectifs et de maintenir une certaine régularité dans mon travail. Cette valeur est également importante pour gérer efficacement les projets et respecter les délais fixés.
+          </div>
+        </div>
+
+        <div class="value-card pos">
+          <div class="value-name"><span class="value-icon">🤝</span> Collaboration</div>
+          <div class="value-desc">La collaboration est une valeur essentielle pour moi, car elle permet de construire des projets plus efficaces et plus enrichissants. 
+            Dans le domaine du numérique, les projets nécessitent souvent l’intervention de plusieurs personnes ayant des compétences différentes. 
+            Travailler en équipe permet non seulement de partager des idées et des connaissances, mais aussi d’apprendre à mieux communiquer et à s’adapter aux autres. 
+            Mes expériences en projets de groupe, en tutorat et dans le milieu associatif m’ont montré que la qualité des échanges au sein d’une équipe a un impact direct sur l’avancement et la réussite d’un projet.</div>
+        </div>
+
+        <div class="value-card pos">
+          <div class="value-name"><span class="value-icon">🎯</span> Rigueur</div>
+          <div class="value-desc">La rigueur est également une valeur importante dans ma manière de travailler.
+            Les projets numériques demandent de la précision, de l’organisation et une certaine méthodologie afin d’éviter les erreurs et garantir un résultat fiable.
+            À travers ma formation, j’ai compris qu’un manque de rigueur peut rapidement entraîner des problèmes techniques, des pertes de temps ou des difficultés dans le travail collectif.
+            Cette valeur me pousse donc à adopter une méthode de travail structurée et à être attentif à la qualité du travail réalisé.
+          </div>
+        </div>
+
+        <div class="value-card pos">
+          <div class="value-name"><span class="value-icon">🌱</span> Curiosité</div>
+          <div class="value-desc">La curiosité joue aussi un rôle important dans mon parcours. Le secteur du numérique évolue constamment avec l’apparition de nouvelles technologies, de nouveaux outils et de nouvelles méthodes de travail.
+            Cette évolution permanente demande une capacité d’adaptation et une volonté d’apprendre continuellement. Pour moi, la curiosité permet de rester motivé, de développer ses compétences et de mieux comprendre les évolutions du secteur.
+            Elle me pousse également à approfondir certains sujets au-delà de ce qui est demandé dans ma formation.
+          </div>
+        </div>
+      </div>
+
+      <!-- DIVISEUR -->
+      <div class="values-divider"></div>
+
+      <!-- ANTI-VALEURS -->
+      <div class="anim-slideUp delay-2">
+        <div class="values-group-title">
+          <div class="dot dot-red"></div>
+          Ce que je refuse
+        </div>
+
+        <div class="value-card neg">
+          <div class="value-name"><span class="value-icon">🚧</span> Absence d’évolution</div>
+          <div class="value-desc">L’absence d’évolution professionnelle représente également une limite importante pour moi. J’ai besoin d’évoluer dans un environnement où il est possible de progresser, d’acquérir de nouvelles responsabilités et d’apprendre continuellement. Sans cette dynamique, il devient difficile de rester motivé sur le long terme.</div>
+        </div>
+
+        <div class="value-card neg">
+          <div class="value-name"><span class="value-icon">🔇</span> Mauvaise organisation</div>
+          <div class="value-desc">Pourquoi ce comportement vous pose problème dans un contexte professionnel.</div>
+        </div>
+
+        <div class="value-card neg">
+          <div class="value-name"><span class="value-icon">🎭</span>Environnement peu stimulant</div>
+          <div class="value-desc">un environnement peu stimulant ne correspond pas à mes attentes professionnelles. J’ai besoin d’évoluer dans un cadre dynamique où les projets permettent d’apprendre, d’innover et de relever de nouveaux défis. C’est cette possibilité d’évolution et d’amélioration continue qui me motive dans mon orientation vers l’ingénierie numérique.</div>
+        </div>
+
+        <div class="value-card neg">
+          <div class="value-name"><span class="value-icon">⛓</span> Travail répétitif</div>
+          <div class="value-desc">Le travail répétitif peut limiter la motivation et réduire les possibilités d’apprentissage. Or, dans un secteur en constante évolution comme le numérique, je considère qu’il est important de pouvoir découvrir de nouvelles problématiques et continuer à développer ses compétences.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAVIGATION BAS DE PAGE -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+      <a href="formation.html" class="btn btn-outline">← Formation</a>
+      <a href="projet.html" class="btn btn-outline">Projet pro →</a>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-brand">Prénom Nom</span>
+    <ul class="footer-nav">
+      <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+      <li><a href="https://github.com" target="_blank">GitHub</a></li>
+      <li><a href="#">CV PDF</a></li>
+      <li><a href="mailto:votre@email.com">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2025 Prénom Nom — Portfolio Ingénieur Numérique</div>
+  </footer>
+</div>
+
+</body>
+</html>

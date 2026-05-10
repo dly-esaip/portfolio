@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Damien LY</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── HERO SPECIFIC ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: calc(var(--nav-h) + 4rem) 3rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 90% 80% at 60% 10%, black 20%, transparent 80%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,245,66,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+      display: flex; align-items: center; gap: 0.75rem;
+      opacity: 0;
+      animation: slideInY 0.6s var(--ease) 0.1s forwards;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 30px; height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-name {
+      font-size: clamp(4rem, 9vw, 8rem);
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      display: block;
+      opacity: 0;
+      animation: slideInY 0.7s var(--ease) 0.2s forwards;
+    }
+
+    .hero-title {
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      -webkit-text-stroke: 1px var(--muted);
+      color: transparent;
+      display: block;
+      opacity: 0;
+      animation: slideInY 0.7s var(--ease) 0.32s forwards;
+    }
+
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      opacity: 0;
+      animation: slideInY 0.6s var(--ease) 0.48s forwards;
+    }
+
+    .hero-meta-item { display: flex; flex-direction: column; gap: 0.3rem; }
+
+    .hero-meta-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .hero-meta-value { font-size: 0.92rem; font-weight: 700; }
+
+    .hero-cta {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      margin-top: 3rem;
+      opacity: 0;
+      animation: slideInY 0.6s var(--ease) 0.6s forwards;
+    }
+
+    .scroll-hint {
+      position: absolute; bottom: 2.5rem; right: 3rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      writing-mode: vertical-rl;
+      display: flex; align-items: center; gap: 0.5rem;
+      animation: float 2.5s ease-in-out infinite;
+    }
+
+    /* ── INDEX CARDS ── */
+    .index-section {
+      padding: 6rem 0;
+    }
+
+    .index-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 3rem;
+    }
+
+    .index-card {
+      background: var(--surface);
+      padding: 2.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex; flex-direction: column; gap: 1.2rem;
+      transition: background 0.25s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .index-card:hover { background: var(--surface2); }
+
+    .index-card:hover .index-card-arrow { transform: translateX(4px); }
+
+    .index-card-num {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+    }
+
+    .index-card-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .index-card-desc {
+      font-size: 0.85rem;
+      color: var(--muted2);
+      line-height: 1.7;
+    }
+
+    .index-card-arrow {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-top: auto;
+      transition: transform 0.2s var(--ease);
+    }
+
+    .index-card-accent {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s var(--ease);
+    }
+
+    .index-card:hover .index-card-accent { transform: scaleX(1); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Damien LY</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active"><span class="nav-num">00</span>Accueil</a></li>
+    <li><a href="orientation.html"><span class="nav-num">01</span>Profil</a></li>
+    <li><a href="formation.html"><span class="nav-num">02</span>Formation</a></li>
+    <li><a href="valeurs.html"><span class="nav-num">03</span>Valeurs</a></li>
+    <li><a href="projet.html"><span class="nav-num">04</span>Projet Pro</a></li>
+    <li><a href="benevolat.html"><span class="nav-num">05</span>Engagements bénévoles</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-tag">Portfolio · Ingénieur Numérique · 4ème année</div>
+  <span class="hero-name">Damien LY</span>
+  <span class="hero-title">Ingénieur Numérique</span>
+
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">École</span>
+      <span class="hero-meta-value">ESAIP</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Spécialisation</span>
+      <span class="hero-meta-value">Cybersécurité</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Localisation</span>
+      <span class="hero-meta-value">Saint Barthélémy d'anjou, France</span>
+    </div>
+  </div>
+
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="orientation.html">Découvrir mon parcours</a>
+    <a class="btn btn-outline" href="mailto:votre@email.com">Me contacter</a>
+  </div>
+
+  <div class="scroll-hint">Scroll ↓</div>
+</div>
+
+<!-- INDEX SECTIONS -->
+<div class="container">
+  <div class="index-section">
+    <div class="section-label">Sommaire</div>
+
+    <div class="index-grid">
+
+      <a class="index-card" href="orientation.html">
+        <div class="index-card-accent" style="background: var(--accent);"></div>
+        <div class="index-card-num">01</div>
+        <div class="index-card-title">Mon orientation</div>
+        <div class="index-card-desc">Pourquoi j'ai choisi l'ingénierie numérique — le déclic, la conviction, le chemin.</div>
+        <div class="index-card-arrow">→</div>
+      </a>
+
+      <a class="index-card" href="formation.html">
+        <div class="index-card-accent" style="background: var(--accent2);"></div>
+        <div class="index-card-num">02</div>
+        <div class="index-card-title">Ma formation</div>
+        <div class="index-card-desc">Ce que j'ai apprécié, ce qui m'a manqué, et le lien avec mon projet professionnel.</div>
+        <div class="index-card-arrow">→</div>
+      </a>
+
+      <a class="index-card" href="valeurs.html">
+        <div class="index-card-accent" style="background: var(--accent3);"></div>
+        <div class="index-card-num">03</div>
+        <div class="index-card-title">Valeurs & anti-valeurs</div>
+        <div class="index-card-desc">Ce qui me guide, ce que je refuse — ma boussole professionnelle et personnelle.</div>
+        <div class="index-card-arrow">→</div>
+      </a>
+
+      <a class="index-card" href="projet.html">
+        <div class="index-card-accent" style="background: var(--accent4);"></div>
+        <div class="index-card-num">04</div>
+        <div class="index-card-title">Projet professionnel</div>
+        <div class="index-card-desc">Mes compétences clés, mon projet, et comment je me vois dans 5 ans.</div>
+        <div class="index-card-arrow">→</div>
+      </a>
+
+      <a class="index-card" href="benevolat.html">
+        <div class="index-card-accent" style="background: var(--accent2);"></div>
+        <div class="index-card-num">05</div>
+        <div class="index-card-title">Engagements bénévoles</div>
+        <div class="index-card-desc">L'acquisition de compétences en dehors du cadre scolaire.</div>
+        <div class="index-card-arrow">→</div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">Damien LY</span>
+  <ul class="footer-nav">
+    <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+    <li><a href="CV_Damien_LY.pdf">CV PDF</a></li>
+    <li><a href="mailto:votre@email.com">Contact</a></li>
+  </ul>
+  <div class="footer-copy">Damien LY — Portfolio Ingénieur Numérique</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ma formation — Portfolio Damien LY</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── MIND MAP VISUELLE ── */
+    .mindmap-wrapper {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 3rem;
+      margin: 3rem 0;
+      overflow-x: auto;
+    }
+
+    .mindmap-title {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+    }
+
+    .mindmap {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      min-width: 700px;
+    }
+
+    .mm-center {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: var(--accent);
+      color: #0c0c0c;
+      font-weight: 800;
+      font-size: 0.88rem;
+      letter-spacing: -0.01em;
+      text-align: center;
+      padding: 1.5rem 2rem;
+      border-radius: var(--radius);
+      min-width: 160px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mm-connector {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+      flex-shrink: 0;
+      width: 60px;
+      position: relative;
+    }
+
+    .mm-connector::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 50%;
+      width: 100%;
+      height: 1px;
+      background: var(--border2);
+    }
+
+    .mm-branches {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+    }
+
+    .mm-branch {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.2rem;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .mm-branch:hover { border-color: var(--border2); }
+
+    .mm-branch-label {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .mm-branch p {
+      font-size: 0.82rem;
+      color: var(--muted2);
+      line-height: 1.5;
+    }
+
+    .mm-branch.c1 .mm-branch-label { color: var(--accent); }
+    .mm-branch.c2 .mm-branch-label { color: var(--accent2); }
+    .mm-branch.c3 .mm-branch-label { color: var(--accent3); }
+    .mm-branch.c4 .mm-branch-label { color: var(--accent4); }
+
+    /* ── TABLE COMPARAISON ── */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+
+    .compare-table th {
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.75rem 1.2rem;
+      border-bottom: 1px solid var(--border2);
+    }
+
+    .compare-table td {
+      padding: 1rem 1.2rem;
+      font-size: 0.88rem;
+      color: var(--muted2);
+      border-bottom: 1px solid var(--border);
+      line-height: 1.6;
+      vertical-align: top;
+    }
+
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .td-pos { color: var(--accent) !important; font-weight: 700; }
+    .td-neg { color: var(--danger) !important; font-weight: 700; }
+
+    /* ── 2-COLUMN CARDS ── */
+    .formation-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .formation-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .formation-card:hover {
+      border-color: var(--border2);
+      transform: translateY(-3px);
+    }
+
+    .formation-card h3 {
+      font-size: 1rem;
+      margin: 1rem 0 1.2rem;
+    }
+
+    /* ── LIEN PRO BLOCK ── */
+    .lien-pro-block {
+      background: linear-gradient(135deg, rgba(200,245,66,0.05), rgba(66,245,167,0.03));
+      border: 1px solid rgba(200,245,66,0.15);
+      border-radius: var(--radius);
+      padding: 3rem;
+      margin-top: 2rem;
+    }
+
+    .lien-pro-block h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .lien-pro-block p {
+      font-size: 0.92rem;
+      color: var(--muted2);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+
+    .lien-pro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .lien-pro-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .lien-pro-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+    .lien-pro-text {
+      font-size: 0.84rem;
+      color: var(--muted2);
+      line-height: 1.6;
+    }
+
+    .lien-pro-text strong { color: var(--text); display: block; margin-bottom: 0.2rem; }
+
+    @media (max-width: 768px) {
+      .formation-cards { grid-template-columns: 1fr; }
+      .lien-pro-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Damien LY</a>
+  <ul class="nav-links">
+    <li><a href="index.html"><span class="nav-num">00</span>Accueil</a></li>
+    <li><a href="orientation.html"><span class="nav-num">01</span>Profil</a></li>
+    <li><a href="formation.html" class="active"><span class="nav-num">02</span>Formation</a></li>
+    <li><a href="valeurs.html"><span class="nav-num">03</span>Valeurs</a></li>
+    <li><a href="projet.html"><span class="nav-num">04</span>Projet Pro</a></li>
+    <li><a href="benevolat.html"><span class="nav-num">05</span>Engagements bénévoles</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrapper">
+  <div class="container">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header anim-slideUp">
+      <div class="page-header-bg"></div>
+      <div class="page-header-tag">02 · Ma formation</div>
+      <h1 class="page-title">Apport de ma formation<br>à mon projet professionnel</h1>
+      <p class="page-subtitle">
+        Analyse de mon cursus en ingénierie numérique :
+        ce que j'ai apprécié, ce qui m'a manqué, et le lien avec la cybersécurité.
+      </p>
+    </div>
+
+    <!-- CARTE MENTALE -->
+    <div class="section-label">Vue d'ensemble — Carte mentale</div>
+
+    <div class="mindmap-wrapper anim-fadeIn delay-1">
+      <div class="mindmap-title">Ma formation · Carte de synthèse</div>
+      <div class="mindmap">
+
+        <div class="mm-center">
+          Ingénierie<br/>Numérique<br/>ESAIP
+        </div>
+
+        <div class="mm-connector"></div>
+
+        <div class="mm-branches">
+          <div class="mm-branch c1">
+            <div class="mm-branch-label">✦ Ce que j'ai apprécié</div>
+            <p>TP réseaux &amp; systèmes · Projets en équipe · Cours de sécurité réseau · Méthodes agiles · Intervenants professionnels</p>
+          </div>
+          <div class="mm-branch c2">
+            <div class="mm-branch-label">◆ Ce qui m'a manqué</div>
+            <p>Peu de pratique offensive (CTF, pentest) · Cas réels limités en cybersécurité · Peu de projet</p>
+          </div>
+          <div class="mm-branch c3">
+            <div class="mm-branch-label">⬡ Compétences acquises</div>
+            <p>Mise en place de service sous Linux · Réseaux TCP/IP · Virtualisation · Gestion de projet  · Rédaction de documentation technique</p>
+          </div>
+          <div class="mm-branch c4">
+            <div class="mm-branch-label">✧ Lien avec mon projet pro</div>
+            <p>Socle technique solide pour la cybersécurité · Compréhension des architectures à protéger</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TABLE COMPARAISON -->
+    <div class="section-label">Tableau de synthèse</div>
+
+    <div class="card anim-slideUp delay-2" style="overflow-x:auto;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Domaine / Module</th>
+            <th>✦ Ce que j'ai apprécié</th>
+            <th>◆ Ce qui m'a manqué</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Systèmes &amp; réseaux</strong></td>
+            <td>TP réseaux ou cybersécurité sur Linux, configuration de switchs et routeurs, compréhension des couches basses qui sont des compétences techniques utiles et directement intégrable dans l'administration d'un réseau en entreprise</td>
+            <td>Peu d'exposition aux environnements cloud (AWS, Azure) qui sont aujourd'hui incontournables en entreprise</td>
+          </tr>
+          <tr>
+            <td><strong>Cybersécurité</strong></td>
+            <td>Introduction aux concepts de sécurité réseau, sensibilisation aux menaces (CVE, MITRE), TP sur OPNsense et les logs</td>
+            <td>Manque de pratique offensive réelle : pas de CTF organisés, peu de labs de pentesting
+          <tr>
+            <td><strong>Développement logiciel</strong></td>
+            <td>Pédagogie progressive avec mélange entre cours magistraux pour comprendre les concepts et TP pour appliquer les concepts.</td>
+            <td>Peu de projet concret ou réaliste qui peut être valorisé dans un cadre professionel</td>
+          </tr>
+          <tr>
+            <td><strong>Gestion de projet</strong></td>
+            <td>Méthodes agiles bien enseignées et appliquées en projet, prise de responsabilité dans les équipes, gestion des délais</td>
+            <td>Les projets restaient académiques, il y avait peu de confrontation avec de vrais clients ou des contraintes de production réelles</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-sep"></div>
+
+    <!-- CARDS DÉTAIL -->
+    <div class="section-label">Analyse détaillée</div>
+
+    <div class="formation-cards">
+
+      <div class="formation-card card-accent-left anim-slideUp">
+        <span class="badge badge-green">✦ Ce que j'ai apprécié</span>
+        <h3>Points forts du cursus</h3>
+        <ul class="list-arrow">
+          <li>Les TP systèmes et réseaux très concrets, proches de ce qu'on retrouve en entreprise</li>
+          <li>La pédagogie par projets en équipe qui développe la collaboration et la rigueur</li>
+          <li>Les cours de sécurité réseau qui ont confirmé et approfondi ma spécialisation</li>
+          <li>L'enseignement des méthodes agiles (Scrum) appliqué à de vrais projets académiques</li>
+          <li>Les intervenants professionnels qui apportent un regard terrain indispensable</li>
+        </ul>
+      </div>
+
+      <div class="formation-card card-accent-left accent2 anim-slideUp delay-1">
+        <span class="badge badge-teal">◆ Ce qui m'a manqué</span>
+        <h3>Ce que j'aurais voulu approfondir</h3>
+        <ul class="list-arrow">
+          <li>Des CTF ou labs de pentesting intégrés au cursus pour pratiquer la sécurité offensive</li>
+          <li>La préparation à des certifications reconnues (Security+, CEH) pendant la formation</li>
+          <li>Une exposition plus forte aux environnements cloud (AWS, Azure, GCP) très demandés en entreprise</li>
+          <li>Des projets avec de vraies contraintes clients ou des environnements de production à ne pas casser</li>
+          <li>La gestion de crise cyber — scénarios d'incident réel, communication sous pression</li>
+        </ul>
+      </div>
+
+      <div class="formation-card card-accent-left accent3 anim-slideUp delay-2">
+        <span class="badge badge-yellow">⬡ Compétences acquises</span>
+        <h3>Ce que je maîtrise aujourd'hui</h3>
+        <ul class="list-arrow">
+          <li>Administration Linux (Ubuntu, Debian) — ligne de commande, gestion de services</li>
+          <li>Réseaux TCP/IP — VLAN, DHCP, adressage, configuration d'équipements</li>
+          <li>Virtualisation — VMware, VirtualBox, Proxmox pour les environnements de test</li>
+          <li>Développement Python, Java, PHP — compréhension des vulnérabilités applicatives</li>
+          <li>Gestion de projet agile, communication orale, rédaction de documentations techniques</li>
+        </ul>
+      </div>
+
+      <div class="formation-card card-accent-left accent4 anim-slideUp delay-3">
+        <span class="badge badge-purple">✧ Ce que j'ai complété par moi-même</span>
+        <h3>Auto-formation &amp; expériences terrain</h3>
+        <ul class="list-arrow">
+          <li>Veille cybersécurité autonome : suivi des CVE, NIST, MITRE ATT&amp;CK, directive NIS</li>
+          <li>Expérience concrète en stage : bastion réseau, OPNsense, logs, conformité NIS</li>
+          <li>Tutorat sur Linux et réseaux — apprendre en enseignant consolide les bases</li>
+          <li>Gestion associative (trésorier ESAIP Games) — compétences non enseignées en cours</li>
+          <li>Pratique sportive en club — discipline et travail d'équipe hors cadre académique</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="section-sep"></div>
+
+    <!-- LIEN AVEC PROJET PRO -->
+    <div class="section-label">Lien avec mon projet professionnel</div>
+
+    <div class="lien-pro-block anim-slideUp">
+      <h3>En quoi ma formation prépare mon métier cible</h3>
+      <p>
+        Ma formation à l'ESAIP, combinée à mon BTS SISR, m'a construit un profil complet :
+        je comprends les architectures réseau de l'intérieur, ce qui est un prérequis fondamental
+        pour un ingénieur cybersécurité. On ne peut pas protéger ce qu'on ne comprend pas.
+      </p>
+      <p>
+        La formation m'a apporté le socle technique nécessaire, mais c'est surtout l'expérience accumulée
+        lors de mes stages et mes engagements bénévoles qui vont donner du sens à ce que je souhaite faire dans le futur.
+        Le stage à Cholet Agglomération où j'ai observé la mise en place d'un bastion réseau
+        pour répondre à la directive NIS a été le moment où j'ai compris concrètement
+        ce que signifie sécuriser un système en production, sans impacter les services.
+      </p>
+
+      <div class="lien-pro-grid">
+        <div class="lien-pro-item">
+          <div class="lien-pro-icon">🛡️</div>
+          <div class="lien-pro-text">
+            <strong>Comprendre les architectures à protéger</strong>
+            Les cours réseaux et les TP systèmes me donnent la vision complète de ce que je dois sécuriser, pas seulement des outils pour le faire.
+          </div>
+        </div>
+        <div class="lien-pro-item">
+          <div class="lien-pro-icon">👥</div>
+          <div class="lien-pro-text">
+            <strong>Travailler en équipe sur des sujets critiques</strong>
+            Les projets académiques en équipe préparent à la réalité des équipes SOC ou infrastructure où la coordination est essentielle.
+          </div>
+        </div>
+        <div class="lien-pro-item">
+          <div class="lien-pro-icon">📋</div>
+          <div class="lien-pro-text">
+            <strong>Documenter et communiquer avec précision</strong>
+            La rédaction technique apprise en formation est directement utile pour les rapports d'incident, les procédures et les audits.
+          </div>
+        </div>
+        <div class="lien-pro-item">
+          <div class="lien-pro-icon">⚠️</div>
+          <div class="lien-pro-text">
+            <strong>Lacunes identifiées à combler</strong>
+            Cloud, certifications (Security+, OSCP) et pratique offensive (CTF, pentest) sont mes axes de progression prioritaires dès mon entrée en poste.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAVIGATION BAS DE PAGE -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+      <a href="orientation.html" class="btn btn-outline">← Profil</a>
+      <a href="valeurs.html" class="btn btn-outline">Mes valeurs →</a>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-brand">Damien LY</span>
+    <ul class="footer-nav">
+      <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+      <li><a href="CV_Damien_LY.pdf">CV PDF</a></li>
+      <li><a href="mailto:damien.ly03@gmail.com">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Damien LY — Portfolio Ingénieur Numérique</div>
+  </footer>
+</div>
+
+</body>
+</html>
