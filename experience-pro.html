@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expériences professionnelles — Portfolio Damien LY</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+
+    /* ── EXPERIENCE CARD ── */
+    .exp-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 3rem;
+      transition: border-color 0.25s;
+    }
+
+    .exp-card:hover { border-color: var(--border2); }
+
+    .exp-card-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 2rem;
+      padding: 2.5rem 2.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-card-num {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .exp-card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.8rem;
+    }
+
+    .exp-meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      color: var(--muted2);
+    }
+
+    .exp-meta-pill.accent { color: var(--accent); border-color: rgba(200,245,66,0.2); background: rgba(200,245,66,0.06); }
+    .exp-meta-pill.accent2 { color: var(--accent2); border-color: rgba(66,245,167,0.2); background: rgba(66,245,167,0.06); }
+
+    .exp-card-body {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* ── SECTIONS INTERNES ── */
+    .exp-section-title {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .exp-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 60px;
+    }
+
+    .exp-section-text {
+      font-size: 0.9rem;
+      color: var(--muted2);
+      line-height: 1.85;
+    }
+
+    /* ── MISSIONS LIST ── */
+    .missions-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .missions-list li {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 0.75rem;
+      align-items: start;
+    }
+
+    .mission-marker {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-family: var(--font-mono);
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .mission-text {
+      font-size: 0.88rem;
+      color: var(--muted2);
+      line-height: 1.7;
+    }
+
+    .mission-text strong { color: var(--text); }
+
+    /* ── COMPÉTENCES TAGS ── */
+    .skills-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .skill-tag-item {
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted2);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .skill-tag-item:hover { border-color: var(--accent); color: var(--accent); }
+    .skill-tag-item.t { color: var(--accent); border-color: rgba(200,245,66,0.2); background: rgba(200,245,66,0.06); }
+    .skill-tag-item.b { color: var(--accent2); border-color: rgba(66,245,167,0.2); background: rgba(66,245,167,0.06); }
+
+    /* ── CONCLUSION BOX ── */
+    .conclusion-box {
+      background: linear-gradient(135deg, rgba(200,245,66,0.04), rgba(66,245,167,0.03));
+      border: 1px solid rgba(200,245,66,0.12);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .conclusion-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+    .conclusion-box p {
+      font-size: 0.88rem;
+      color: var(--muted2);
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    /* ── ACCENT LEFT BORDER PAR CARD ── */
+    .exp-card.card-1 { border-left: 2px solid var(--accent); }
+    .exp-card.card-2 { border-left: 2px solid var(--accent2); }
+    .exp-card.card-3 { border-left: 2px solid var(--accent3); }
+
+    .exp-card.card-1 .exp-section-title { color: var(--accent); }
+    .exp-card.card-2 .exp-section-title { color: var(--accent2); }
+    .exp-card.card-3 .exp-section-title { color: var(--accent3); }
+
+    .exp-card.card-2 .mission-marker { color: var(--accent2); }
+    .exp-card.card-3 .mission-marker { color: var(--accent3); }
+
+    @media (max-width: 768px) {
+      .exp-card-header { grid-template-columns: 1fr; }
+      .exp-card-body { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Damien LY</a>
+  <ul class="nav-links">
+    <li><a href="index.html"><span class="nav-num">00</span>Accueil</a></li>
+    <li><a href="orientation.html"><span class="nav-num">01</span>Profil</a></li>
+    <li><a href="formation.html"><span class="nav-num">02</span>Formation</a></li>
+    <li><a href="valeurs.html"><span class="nav-num">03</span>Valeurs</a></li>
+    <li><a href="projet.html"><span class="nav-num">04</span>Projet Pro</a></li>
+    <li><a href="benevolat.html"><span class="nav-num">05</span>Engagements bénévoles</a></li>
+    <li><a href="experience-pro.html" class="active"><span class="nav-num">06</span>Expériences</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrapper">
+  <div class="container">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header anim-slideUp">
+      <div class="page-header-bg"></div>
+      <div class="page-header-tag">06 · Expériences professionnelles</div>
+      <h1 class="page-title">Mes expériences<br>professionnelles</h1>
+      <p class="page-subtitle">
+        Stages, emplois étudiants et missions — chaque expérience
+        a contribué à construire mon profil d'ingénieur en cybersécurité.
+      </p>
+    </div>
+
+    <!-- ── EXP 1 : GRAPHIC PACKAGING ── -->
+    <div class="exp-card card-1 anim-slideUp delay-1">
+
+      <div class="exp-card-header">
+        <div>
+          <div class="exp-card-num">01 · Emploi étudiant</div>
+          <div class="exp-card-title">Graphic Packaging International</div>
+          <div class="exp-card-meta">
+            <span class="exp-meta-pill accent">Juillet – Août 2024</span>
+            <span class="exp-meta-pill">Copiste · Service pré-presse</span>
+            <span class="exp-meta-pill">Secteur : Emballage industriel</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card-body">
+
+        <!-- Contexte -->
+        <div>
+          <div class="exp-section-title">Contexte</div>
+          <p class="exp-section-text">
+            J'ai intégré Graphic Packaging International pour effectuer un emploi saisonnier en tant
+            que copiste au sein du service pré-presse. Graphic Packaging est une entreprise reconnue
+            dans la fabrication de solutions d'emballage en carton — alimentaire, cosmétique, santé,
+            articles ménagers — avec un fort accent sur l'innovation et le respect de l'environnement.
+          </p>
+          <p class="exp-section-text" style="margin-top:0.75rem;">
+            Mon service était composé de 6 personnes : 5 collaborateurs travaillant dans les bureaux
+            sur la partie contrôle et préparation des fichiers, et moi seul en production, chargé de
+            fabriquer les plaques aluminium. J'occupais ainsi un poste unique et critique : celui
+            en début de chaîne de production, sans lequel aucune impression ne pouvait démarrer.
+          </p>
+        </div>
+
+        <!-- Missions -->
+        <div>
+          <div class="exp-section-title">Missions</div>
+          <ul class="missions-list">
+            <li>
+              <div class="mission-marker">01</div>
+              <div class="mission-text"><strong>Vérification et contrôle des fichiers</strong> — relecture rigoureuse des fichiers numériques transmis par les bureaux, contrôle de la conformité des informations (dimensions, repères, données client) et corrections avant envoi en production.</div>
+            </li>
+            <li>
+              <div class="mission-marker">02</div>
+              <div class="mission-text"><strong>Préparation et archivage des échantillons</strong> — mise en enveloppe des morceaux d'emballages servant de modèles de référence pour les futures productions, classés rigoureusement par client pour assurer la traçabilité.</div>
+            </li>
+            <li>
+              <div class="mission-marker">03</div>
+              <div class="mission-text"><strong>Utilisation de logiciels spécialisés</strong> — logiciel de planification pour consulter et prioriser les commandes clients en attente, logiciel dédié au transfert des fichiers numériques vers la développeuse avant impression sur plaque.</div>
+            </li>
+            <li>
+              <div class="mission-marker">04</div>
+              <div class="mission-text"><strong>Production de plaques aluminium (CTP &amp; développeuse)</strong> — copie des modèles d'emballages validés sur des plaques aluminium via les machines CTP (Computer to Plate) et développeuse, puis transmission au service impression pour lancer la production.</div>
+            </li>
+            <li>
+              <div class="mission-marker">05</div>
+              <div class="mission-text"><strong>Entretien préventif quotidien des machines</strong> — maintenance régulière des deux machines de production pour garantir la qualité des plaques et prévenir toute panne susceptible d'arrêter l'ensemble de la chaîne de fabrication de l'entreprise.</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contexte de pression -->
+        <div>
+          <div class="exp-section-title">Un poste sous pression</div>
+          <p class="exp-section-text">
+            Dès mon arrivée, j'ai dû prendre en charge le poste en autonomie complète : la personne
+            habituellement à ce poste partait en vacances et c'est moi qui assurais la continuité.
+            La pression était réelle — <strong>mon poste se situait en tout début de chaîne de production</strong> :
+            sans les plaques aluminium que je produisais, aucune impression ne pouvait avoir lieu, ce qui
+            signifiait l'arrêt total de la production de l'entreprise en cas de panne ou d'erreur de ma part.
+          </p>
+          <p class="exp-section-text" style="margin-top:0.75rem;">
+            Cette responsabilité m'a appris à <strong>maintenir un niveau d'attention constant sous contrainte</strong>,
+            à diagnostiquer rapidement les anomalies sur les machines et à prendre des décisions seul
+            sans pouvoir systématiquement solliciter un supérieur. Une expérience qui m'a beaucoup apporté
+            en termes de <strong>gestion du stress</strong> et de <strong>sens des priorités</strong>.
+          </p>
+        </div>
+
+        <!-- Compétences -->
+        <div>
+          <div class="exp-section-title">Compétences développées</div>
+          <p class="exp-section-text">
+            Les réunions quotidiennes du service — où chacun partageait l'état d'avancement de ses
+            commandes et ses points bloquants — m'ont habitué à <strong>communiquer de façon claire et
+            concise</strong> dans un contexte professionnel exigeant. Travailler en interface directe avec
+            le service impression a aussi développé ma capacité à <strong>collaborer avec des équipes
+            aux contraintes différentes</strong>, en comprenant l'impact de mon travail sur le leur.
+          </p>
+          <div class="skills-tags">
+            <span class="skill-tag-item b">Rigueur &amp; sens du détail</span>
+            <span class="skill-tag-item b">Autonomie complète</span>
+            <span class="skill-tag-item b">Gestion du stress</span>
+            <span class="skill-tag-item b">Communication orale</span>
+            <span class="skill-tag-item b">Travail en équipe</span>
+            <span class="skill-tag-item b">Prise de responsabilités</span>
+            <span class="skill-tag-item b">Gestion des priorités</span>
+            <span class="skill-tag-item t">Logiciels de planification</span>
+            <span class="skill-tag-item t">Machines CTP / Développeuse</span>
+          </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="conclusion-box">
+          <div class="conclusion-icon">💡</div>
+          <p>
+            Cette expérience m'a placé dans une situation de responsabilité réelle dès le premier jour,
+            sans filet. Être seul sur un poste critique en début de chaîne de production m'a appris
+            ce que signifie <strong>assumer pleinement ses responsabilités</strong> dans un environnement industriel.
+            La rigueur, la gestion du stress et la capacité à rester fiable sous pression que j'y ai
+            développées sont des qualités que je retrouve et mobilise directement en cybersécurité,
+            où une erreur peut avoir des conséquences tout aussi importantes sur les systèmes en production.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── EXP 2 : CHOLET AGGLOMÉRATION ── -->
+    <div class="exp-card card-2 anim-slideUp delay-2">
+
+      <div class="exp-card-header">
+        <div>
+          <div class="exp-card-num">02 · Stage BTS — 2ème année</div>
+          <div class="exp-card-title">Cholet Agglomération</div>
+          <div class="exp-card-meta">
+            <span class="exp-meta-pill accent2">Janvier – Février 2023 · 6 semaines</span>
+            <span class="exp-meta-pill">Service Télécommunications &amp; Réseaux</span>
+            <span class="exp-meta-pill">Secteur : Collectivité territoriale</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card-body">
+
+        <!-- Contexte -->
+        <div>
+          <div class="exp-section-title">Contexte</div>
+          <p class="exp-section-text">
+            Dans le cadre de ma 2ème année de BTS SIO option SISR, j'ai effectué un stage de 6 semaines
+            à Cholet Agglomération, au sein du service télécommunications, systèmes et réseaux.
+            Cette communauté d'agglomération regroupe 26 communes autour de Cholet et gère un parc
+            informatique d'environ 2 000 postes, ce qui représente une infrastructure réseau conséquente
+            à maintenir et à sécuriser.
+          </p>
+          <p class="exp-section-text" style="margin-top:0.75rem;">
+            Pendant mon stage, le service avait pour projet ambitieux de <strong>cloisonner le réseau interne</strong>
+            via la mise en place d'un bastion réseau avec OPNsense, en réponse aux obligations de la
+            directive NIS. Ce type de projet impose des contraintes opérationnelles fortes :
+            <strong>toutes les tentatives de déploiement devaient se faire en dehors des heures de travail</strong>
+            des agents, afin de ne pas perturber les services publics. Après chaque intervention nocturne
+            ou en week-end, il fallait s'assurer que tout fonctionnait normalement avant la reprise
+            d'activité — sans quoi 2 000 postes pouvaient se retrouver sans accès réseau.
+          </p>
+        </div>
+
+        <!-- Missions -->
+        <div>
+          <div class="exp-section-title">Missions</div>
+          <ul class="missions-list">
+            <li>
+              <div class="mission-marker">01</div>
+              <div class="mission-text"><strong>Analyse des logs pare-feu avec OPNsense</strong> — observation et interprétation des flux réseau circulant entre les différents segments. L'objectif était d'identifier les trafics légitimes pour établir les futures règles de filtrage sans bloquer ce qui ne devait pas l'être.</div>
+            </li>
+            <li>
+              <div class="mission-marker">02</div>
+              <div class="mission-text"><strong>Participation aux tests de déploiement hors horaires</strong> — présence lors des tentatives de mise en place du bastion réseau en dehors des heures de bureau, avec vérification systématique que les services restaient accessibles après chaque modification de configuration.</div>
+            </li>
+            <li>
+              <div class="mission-marker">03</div>
+              <div class="mission-text"><strong>Veille réglementaire et analyse de vulnérabilités</strong> — recherches approfondies sur la directive NIS, les normes associées et les CVE connues sur les solutions déployées (OPNsense), afin d'anticiper les risques avant mise en production.</div>
+            </li>
+            <li>
+              <div class="mission-marker">04</div>
+              <div class="mission-text"><strong>Configuration de switchs réseau</strong> — configuration d'équipements réseau en suivant une documentation interne, puis intégration dans l'infrastructure existante avec réalisation des tests de connectivité et de non-régression.</div>
+            </li>
+            <li>
+              <div class="mission-marker">05</div>
+              <div class="mission-text"><strong>Rédaction de documentations techniques</strong> — rédaction de procédures et comptes-rendus d'intervention pour assurer la traçabilité des actions et permettre la continuité de service par les équipes permanentes.</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contrainte forte -->
+        <div>
+          <div class="exp-section-title">Une contrainte opérationnelle forte</div>
+          <p class="exp-section-text">
+            Le défi principal de ce projet n'était pas uniquement technique — c'était aussi
+            <strong>organisationnel</strong>. Intervenir sur un réseau hébergeant 2 000 postes actifs
+            sans impacter les agents imposait une rigueur de planification exigeante : chaque test
+            était préparé en amont, documenté, et suivi d'une vérification complète avant la reprise
+            d'activité. J'ai compris à cette occasion ce que signifie réellement <strong>travailler sur
+            un système en production</strong> — où l'erreur a des conséquences directes sur des utilisateurs
+            réels, et où la prudence et la méthode priment sur la rapidité.
+          </p>
+        </div>
+
+        <!-- Compétences -->
+        <div>
+          <div class="exp-section-title">Compétences développées</div>
+          <p class="exp-section-text">
+            Ce stage a été le déclic de mon orientation vers la cybersécurité. En passant beaucoup
+            de temps à m'informer seul sur les réglementations, les CVE et les architectures de
+            sécurité, j'ai développé une vraie <strong>autonomie intellectuelle</strong> et une habitude
+            de veille technologique que je maintiens depuis. J'ai également pris conscience de
+            l'importance stratégique de la cybersécurité dans des structures publiques qui
+            gèrent des données sensibles et des services essentiels aux citoyens.
+          </p>
+          <div class="skills-tags">
+            <span class="skill-tag-item t">OPNsense · Analyse de logs</span>
+            <span class="skill-tag-item t">Configuration switchs</span>
+            <span class="skill-tag-item t">Tests d'intégration réseau</span>
+            <span class="skill-tag-item t">Veille CVE / NIS</span>
+            <span class="skill-tag-item t">Rédaction technique</span>
+            <span class="skill-tag-item b">Autonomie</span>
+            <span class="skill-tag-item b">Curiosité technique</span>
+            <span class="skill-tag-item b">Rigueur opérationnelle</span>
+            <span class="skill-tag-item b">Sens des responsabilités</span>
+          </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="conclusion-box">
+          <div class="conclusion-icon">💡</div>
+          <p>
+            Ce stage a été fondateur. Observer la mise en place d'une solution de sécurité sur un réseau
+            réel, comprendre pourquoi on intervient la nuit pour ne pas impacter les utilisateurs,
+            voir concrètement ce que signifie protéger une infrastructure publique — tout cela a
+            confirmé mon choix de me spécialiser en cybersécurité. <strong>La vigilance permanente,
+            la méthode et la conscience de l'impact de ses actions</strong> sont des réflexes que j'ai
+            commencé à acquérir ici.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── EXP 3 : LA POSTE ── -->
+    <div class="exp-card card-3 anim-slideUp delay-3">
+
+      <div class="exp-card-header">
+        <div>
+          <div class="exp-card-num">03 · Stage BTS — 1ère année</div>
+          <div class="exp-card-title">La Poste — Direction Technique</div>
+          <div class="exp-card-meta">
+            <span class="exp-meta-pill accent3">Mai – Juin 2022 · 6 semaines</span>
+            <span class="exp-meta-pill">Support N2 · Chartres</span>
+            <span class="exp-meta-pill">Secteur : Service public / Logistique</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card-body">
+
+        <!-- Contexte -->
+        <div>
+          <div class="exp-section-title">Contexte</div>
+          <p class="exp-section-text">
+            Dans le cadre de ma 1ère année de BTS SIO option SISR, j'ai effectué un stage de 6 semaines
+            à la Direction Technique de La Poste à Chartres. J'ai intégré un <strong>service support de
+            niveau 2</strong> composé de plusieurs techniciens, où le fonctionnement repose sur un
+            <strong>système de gestion de tickets</strong> : chaque intervention est tracée, priorisée
+            et traitée individuellement. Bien qu'intégré dans une équipe, le travail est en grande
+            partie <strong>autonome</strong> — chaque technicien prend en charge ses tickets de bout en bout,
+            du diagnostic à la résolution.
+          </p>
+          <p class="exp-section-text" style="margin-top:0.75rem;">
+            C'était mon tout premier stage en entreprise, et le premier contact concret avec
+            les réalités d'un service informatique professionnel au sein d'un grand groupe public.
+          </p>
+        </div>
+
+        <!-- Missions -->
+        <div>
+          <div class="exp-section-title">Missions</div>
+          <ul class="missions-list">
+            <li>
+              <div class="mission-marker">01</div>
+              <div class="mission-text"><strong>Traitement de tickets support N2</strong> — prise en charge des incidents et demandes escaladés depuis le support N1, diagnostic des problèmes et résolution en autonomie dans les délais impartis.</div>
+            </li>
+            <li>
+              <div class="mission-marker">02</div>
+              <div class="mission-text"><strong>Installation et déploiement d'applications</strong> — installation de logiciels métiers sur les postes utilisateurs en respectant les procédures de sécurité et les standards du parc informatique de La Poste.</div>
+            </li>
+            <li>
+              <div class="mission-marker">03</div>
+              <div class="mission-text"><strong>Création et gestion de comptes de messagerie</strong> — provisionnement des comptes pour les nouveaux collaborateurs, configuration des accès et vérification du bon fonctionnement avant livraison à l'utilisateur.</div>
+            </li>
+            <li>
+              <div class="mission-marker">04</div>
+              <div class="mission-text"><strong>Maintenance et dépannage de postes</strong> — diagnostic et résolution de pannes matérielles et logicielles sur les postes utilisateurs, avec mise à jour des tickets à chaque étape de traitement.</div>
+            </li>
+            <li>
+              <div class="mission-marker">05</div>
+              <div class="mission-text"><strong>Rédaction de procédures techniques</strong> — documentation des interventions réalisées et des solutions appliquées pour assurer la traçabilité et faciliter la réutilisation par l'équipe sur des incidents similaires.</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Fonctionnement N2 -->
+        <div>
+          <div class="exp-section-title">Découverte du support N2 et de la gestion par tickets</div>
+          <p class="exp-section-text">
+            Le support N2 se distingue du N1 par la complexité des incidents traités : les tickets
+            arrivant à ce niveau ont déjà été filtrés et sont généralement plus techniques, nécessitant
+            une analyse approfondie avant résolution. Travailler en <strong>mode ticket</strong> m'a appris
+            à <strong>structurer mon approche</strong> : lire le contexte transmis par le N1, reproduire
+            le problème si possible, diagnostiquer méthodiquement, résoudre, documenter — puis clôturer.
+          </p>
+          <p class="exp-section-text" style="margin-top:0.75rem;">
+            Même au sein d'une équipe, le traitement était individuel : chaque technicien était
+            responsable de ses tickets de l'ouverture à la clôture. Cela m'a confronté très tôt
+            à la notion de <strong>responsabilité individuelle dans un collectif</strong>, où la qualité
+            du travail de chacun impacte directement la satisfaction des utilisateurs finaux.
+          </p>
+        </div>
+
+        <!-- Compétences -->
+        <div>
+          <div class="exp-section-title">Compétences développées</div>
+          <p class="exp-section-text">
+            Premier stage, premières confrontations avec la réalité du terrain : j'ai appris à
+            travailler dans le respect de procédures strictes, à communiquer avec des
+            <strong>utilisateurs non techniques</strong> en vulgarisant les solutions apportées,
+            et à maintenir une <strong>documentation rigoureuse</strong> de chaque intervention.
+            Ce stage a posé les bases méthodologiques que j'utilise encore aujourd'hui.
+          </p>
+          <div class="skills-tags">
+            <span class="skill-tag-item t">Support N2 / Ticketing</span>
+            <span class="skill-tag-item t">Installation logiciels</span>
+            <span class="skill-tag-item t">Gestion de comptes messagerie</span>
+            <span class="skill-tag-item t">Maintenance postes</span>
+            <span class="skill-tag-item t">Rédaction de procédures</span>
+            <span class="skill-tag-item b">Autonomie</span>
+            <span class="skill-tag-item b">Rigueur documentaire</span>
+            <span class="skill-tag-item b">Communication utilisateurs</span>
+            <span class="skill-tag-item b">Respect des procédures</span>
+          </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="conclusion-box">
+          <div class="conclusion-icon">💡</div>
+          <p>
+            Ce premier stage a posé les fondations de ma pratique professionnelle. Découvrir le
+            fonctionnement d'un service support N2 dans un grand groupe public, apprendre à
+            travailler en autonomie sur des tickets tout en s'inscrivant dans une équipe, et
+            comprendre l'importance de la documentation — autant de réflexes que j'ai ensuite
+            retrouvés et approfondis dans mes stages suivants, et qui restent essentiels
+            en cybersécurité pour tracer chaque action réalisée sur un système.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NAVIGATION BAS DE PAGE -->
+    <div style="display:flex; justify-content:flex-start; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+      <a href="benevolat.html" class="btn btn-outline">← Engagements bénévoles</a>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-brand">Damien LY</span>
+    <ul class="footer-nav">
+      <li><a href="https://www.linkedin.com/in/damien-ly-b94540254/" target="_blank">LinkedIn</a></li>
+      <li><a href="CV_Damien_LY.pdf">CV PDF</a></li>
+      <li><a href="mailto:damien.ly03@gmail.com">Contact</a></li>
+    </ul>
+    <div class="footer-copy">Damien LY — Portfolio Ingénieur Numérique</div>
+  </footer>
+</div>
+
+</body>
+</html>
